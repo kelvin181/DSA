@@ -4,7 +4,7 @@ This is a personal repository where I track my progress and solutions for Data S
 
 ## Stats
 
-![Leetcode Stats](https://leetcard.jacoblin.cool/kay118?ext=heatmap)
+[![Leetcode Stats](https://leetcard.jacoblin.cool/kay118?ext=heatmap)](https://leetcode.com/kay118/)
 
 ## Profiles
 
