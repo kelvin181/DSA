@@ -16,4 +16,5 @@ class Solution:
                 curr += 1
                 while curr % 10 == 0:
                     curr //= 10
+
         return res
