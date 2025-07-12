@@ -1,0 +1,16 @@
+class Solution:
+    def canEat(self, candiesCount: List[int], queries: List[List[int]]) -> List[bool]:
+        pre = [0]
+        for num in candiesCount:
+            pre.append(pre[-1] + num)
+        
+        res = []
+        for t, d, c in queries:
+            if c == 1:
+                res.append(pre[t + 1] - 1 == d)
+                continue
+            earliest = pre[t] // c
+            latest = pre[t + 1] - 1
+            res.append(earliest <= d <= latest)
+        
+        return res
