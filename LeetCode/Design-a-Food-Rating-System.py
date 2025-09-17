@@ -1,30 +1,28 @@
 class FoodRatings:
 
     def __init__(self, foods: List[str], cuisines: List[str], ratings: List[int]):
-        self.heaps = {}
-        self.foods = {}
+        self.heap = {}
+        self.food_info = {}
 
         for i in range(len(foods)):
-            cuisine = cuisines[i]
             food = foods[i]
+            cuisine = cuisines[i]
             rating = ratings[i]
 
-            if cuisine not in self.heaps:
-                self.heaps[cuisine] = []
-            
-            heapq.heappush(self.heaps[cuisine], (-rating, food))
-            self.foods[food] = [cuisine, rating]
-
+            self.food_info[food] = [cuisine, rating]
+            if cuisine not in self.heap:
+                self.heap[cuisine] = []
+            heapq.heappush(self.heap[cuisine], (-rating, food))
+        
     def changeRating(self, food: str, newRating: int) -> None:
-        cuisine, rating = self.foods[food]
-        heapq.heappush(self.heaps[cuisine], (-newRating, food))
-        self.foods[food][1] = newRating        
+        existing = self.food_info[food]
+        existing[1] = newRating
+        heapq.heappush(self.heap[existing[0]], (-newRating, food))
 
     def highestRated(self, cuisine: str) -> str:
-        while -self.heaps[cuisine][0][0] != self.foods[self.heaps[cuisine][0][1]][1]:
-            heapq.heappop(self.heaps[cuisine])
-        return self.heaps[cuisine][0][1]
-
+        while self.heap[cuisine] and -self.heap[cuisine][0][0] != self.food_info[self.heap[cuisine][0][1]][1]:
+            heapq.heappop(self.heap[cuisine])
+        return self.heap[cuisine][0][1]
 
 # Your FoodRatings object will be instantiated and called as such:
 # obj = FoodRatings(foods, cuisines, ratings)
