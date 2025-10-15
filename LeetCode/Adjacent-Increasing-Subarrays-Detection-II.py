@@ -1,15 +1,15 @@
 class Solution:
-    def maxIncreasingSubarrays(self, arr: List[int]) -> int:
-        current_length = 1
-        previous_length = 1
-        res = 1
-        
-        for i in range(1, len(arr)):
-            if arr[i] > arr[i - 1]:
-                current_length += 1
-            else:
-                previous_length = current_length
-                current_length = 1
-            res = max(res, current_length // 2, min(current_length, previous_length))
+    def maxIncreasingSubarrays(self, nums: List[int]) -> int:
+        prev = 0
+        curr = 1
+        res = 0
 
+        for i in range(1, len(nums)):
+            if nums[i - 1] < nums[i]:
+                curr += 1
+            else:
+                prev, curr = curr, 1
+            
+            res = max(res, curr // 2, min(curr, prev))
+        
         return res
